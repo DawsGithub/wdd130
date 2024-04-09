@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    
+  <head>
+    <meta charset="utf-8">
+    <title>superclock.com</title>
+    <link type="text/css" rel="stylesheet" href="site-plan.css">
+  </head>
+
+  <body style="background-color:rgb(28, 39, 141);"></body>
+    <header>
+      <h1>The Superclock Website</h1>
+      <h3>Created By: Dawson Hinckley</h3>
+      <h4>WDD 130</h4>
+      <!-- In the header above, add the name or your site, your name and class number. For example if you are in section 3 you would put WDD 130.03 -->
+    </header>
+    <main>
+      <style>
+        #clock {
+            font-size: 48px;
+            text-align: center;
+            margin-top: 100px;
+        }
+    </style>
+</head>
+<body>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .clock {
+            display: inline-block;
+            margin: 20px;
+        }
+        .clock h2 {
+            margin-bottom: 5px;
+        }
+        .digital-clock {
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome To Ultimate Website Thats All About Time!</h1>
+    <div class="clock">
+        <h2>Current Time And Date</h2>
+        <div class="digital-clock" id="current-time"></div>
+    </div>
+
+    <script>
+        function updateClock() {
+            const now = new Date();
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', timeZoneName: 'short' };
+            const currentTime = now.toLocaleDateString('en-US', options);
+            document.getElementById('current-time').textContent = currentTime;
+        }
+
+        setInterval(updateClock, 1000);
+        updateClock(); // Initial call
+    </script>
+      <!-- ------------------------Steps 2-3------------------------------ -->
+      <hr>
+      
+      <p>The Superclock Website is a website that is focused entirely on your time oriented tasks and questions. 
+       It can often be difficult to find a reliable time keeping website that has many different types of useful functions like this one. 
+       Other websites that are related to time keeping are often riddled with annoying ads and a clunky interface. 
+       Unlike those websites, this time oriented website completely takes out any inconvience and incompetence from your experince. 
+       With an easy to use interface and the absence of ads, your experince on this website will be better than most others by a long shot.
+       We know you will enjoy your TIME here : )</p>  
+
+      <hr>
+      <h2></h2>
+      <h3>WEBSITE LOGO</h3>
+      <img src="Sclock.jpg" 
+            width="650" 
+            height="400" />
+      <hr>
+      
+      
+
+      <table class="colors">
+        <tr><th>3</th><th>Different</th><th>World</th><th>Clocks</th></tr>
+        <!-- Switch to the site-plan.css file and change your colors there. -->
+        <tr><td class="primary"></td><td class="secondary"></td><td class="accent1"></td><td class="accent2"></td></tr>
+      </table>
+<style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .clock {
+            display: inline-block;
+            margin: 20px;
+        }
+        .clock h2 {
+            margin-bottom: 5px;
+        }
+        .digital-clock {
+            font-size: 24px;
+        }
+        .analog-clock {
+            width: 150px;
+            height: 150px;
+            border: 6px solid #333;
+            border-radius: 50%;
+            position: relative;
+        }
+        .hour,
+        .minute,
+        .second {
+            position: absolute;
+            width: 50%;
+            height: 2px;
+            background: #333;
+            top: 50%;
+            transform-origin: 100%;
+            transition: all 0.5s ease-in-out;
+        }
+        .hour {
+            background: #000;
+            transform: rotate(30deg);
+        }
+        .minute {
+            background: #000;
+            transform: rotate(90deg);
+        }
+        .second {
+            background: red;
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+<body>
+    <h2>COMMON WORLD CLOCKS</h2>
+    <div class="clock">
+        <h2>New York</h2>
+        <div class="digital-clock" id="new-york-clock"></div>
+        <div class="analog-clock" id="new-york-analog">
+            <div class="hour"></div>
+            <div class="minute"></div>
+            <div class="second"></div>
+        </div>
+    </div>
+    <div class="clock">
+        <h2>London</h2>
+        <div class="digital-clock" id="london-clock"></div>
+        <div class="analog-clock" id="london-analog">
+            <div class="hour"></div>
+            <div class="minute"></div>
+            <div class="second"></div>
+        </div>
+    </div>
+    <div class="clock">
+        <h2>Tokyo</h2>
+        <div class="digital-clock" id="tokyo-clock"></div>
+        <div class="analog-clock" id="tokyo-analog">
+            <div class="hour"></div>
+            <div class="minute"></div>
+            <div class="second"></div>
+        </div>
+    </div>
+
+    <script>
+        function updateClocks() {
+            const timeZones = {
+                'new-york': 'America/New_York',
+                'london': 'Europe/London',
+                'tokyo': 'Asia/Tokyo'
+            };
+
+            for (const [city, timeZone] of Object.entries(timeZones)) {
+                const now = new Date().toLocaleString('en-US', {timeZone: timeZone});
+                const digitalClock = document.getElementById(`${city}-clock`);
+                const analogClock = document.getElementById(`${city}-analog`);
+
+                digitalClock.textContent = now;
+                
+                const time = new Date(now);
+                const seconds = time.getSeconds() * 6;
+                const minutes = (time.getMinutes() * 6) + (seconds / 60);
+                const hours = (time.getHours() % 12) * 30 + (minutes / 12);
+
+                analogClock.querySelector('.second').style.transform = `rotate(${seconds}deg)`;
+                analogClock.querySelector('.minute').style.transform = `rotate(${minutes}deg)`;
+                analogClock.querySelector('.hour').style.transform = `rotate(${hours}deg)`;
+            }
+        }
+
+        setInterval(updateClocks, 1000);
+        updateClocks(); // Initial call
+    </script>
+      <p class="colored"> 
+     Be sure to check out my other pages! 
+     page 2 has an integrated timer and stopwatch and page 3 has a brief history about clocks and it talks about how they were made and where they came from.
+     And also feel free to use the chatbox to discuss with others about clocks!
+      </p>
+
+      <!-- ------------------------Step 10------------------------------ -->
+
+      <h3> 
+      </h3>
+       
+      <nav>
+        <a href="#">Top</a>
+        <ul>
+          <li><a href="superclockwebsite.html">Page 1 (Home)</a></li>
+          <li><a href="child1.html">Page 2</a></li>
+          <li><a href="child2.html">Page 3</a></li>
+      </ul>
+      </nav>
+      <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        .chat-container {
+            width: 400px;
+            margin: 0 auto;
+            border: 1px solid #ccc;
+            padding: 10px;
+            height: 300px;
+            overflow-y: scroll;
+        }
+        .message {
+            margin-bottom: 10px;
+        }
+        .message .sender {
+            font-weight: bold;
+            color: lightcoral;
+        }
+        .message .text {
+            margin-left: 10px;
+        }
+        .input-container {
+            margin-top: 20px;
+        }
+        input[type="text"] {
+            width: 300px;
+            padding: 5px;
+        }
+        input[type="submit"] {
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container" id="chat-container">
+        <!-- Messages will appear here -->
+    </div>
+    <div class="input-container">
+        <input type="text" id="message-input" placeholder="Type your message...">
+        <input type="submit" value="Send" onclick="sendMessage()">
+    </div>
+
+    <script>
+        function sendMessage() {
+            var messageInput = document.getElementById("message-input");
+            var message = messageInput.value;
+            messageInput.value = ""; // Clear input field after sending message
+
+            if (message.trim() !== "") {
+                addMessage("You", message, true); // Add your message to chat container
+                // Here, you can implement functionality to send the message to a server or handle it as needed
+            }
+        }
+
+        function addMessage(sender, text, isYou) {
+            var chatContainer = document.getElementById("chat-container");
+            var messageDiv = document.createElement("div");
+            var senderSpan = document.createElement("span");
+            var textSpan = document.createElement("span");
+
+            messageDiv.classList.add("message");
+            if (isYou) {
+                sender = "You";
+            }
+            senderSpan.classList.add("sender");
+            senderSpan.textContent = sender + ": ";
+            textSpan.classList.add("text");
+            textSpan.textContent = text;
+
+            messageDiv.appendChild(senderSpan);
+            messageDiv.appendChild(textSpan);
+            chatContainer.appendChild(messageDiv);
+
+            // Scroll to the bottom of the chat container to show the latest message
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+    </script>
+    </main>
+  </body>
+
+</html>

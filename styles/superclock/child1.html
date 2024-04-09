@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Child 1 Webpage</title>
+    <link type="text/css" rel="stylesheet" href="site-plan.css">
+    <body style="background-color:rgb(28, 39, 141);"></body>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .timer-stopwatch {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 50px;
+        }
+        .timer-stopwatch div {
+            margin-right: 20px;
+        }
+        .button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .display {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Timer and Stopwatch</h1>
+    
+    <div class="timer-stopwatch">
+        <div>
+            <h2>Timer</h2>
+            <div class="display" id="timer-display">00:00:00</div>
+            <button class="button" onclick="startTimer()">Start</button>
+            <button class="button" onclick="pauseTimer()">Pause</button>
+            <button class="button" onclick="resetTimer()">Reset</button>
+        </div>
+        <div>
+            <h2>Stopwatch</h2>
+            <div class="display" id="stopwatch-display">00:00:00</div>
+            <button class="button" onclick="startStopwatch()">Start</button>
+            <button class="button" onclick="pauseStopwatch()">Pause</button>
+            <button class="button" onclick="resetStopwatch()">Reset</button>
+        </div>
+    </div>
+
+    <script>
+        let timerInterval;
+        let timerRunning = false;
+        let timerSeconds = 0;
+
+        function startTimer() {
+            if (!timerRunning) {
+                timerInterval = setInterval(updateTimer, 1000);
+                timerRunning = true;
+            }
+        }
+
+        function pauseTimer() {
+            clearInterval(timerInterval);
+            timerRunning = false;
+        }
+
+        function resetTimer() {
+            clearInterval(timerInterval);
+            timerRunning = false;
+            timerSeconds = 0;
+            updateTimerDisplay();
+        }
+
+        function updateTimer() {
+            timerSeconds++;
+            updateTimerDisplay();
+        }
+
+        function updateTimerDisplay() {
+            const hours = Math.floor(timerSeconds / 3600);
+            const minutes = Math.floor((timerSeconds % 3600) / 60);
+            const seconds = timerSeconds % 60;
+
+            const display = `${padZero(hours)}:${padZero(minutes)}:${padZero(seconds)}`;
+            document.getElementById('timer-display').textContent = display;
+        }
+
+        function padZero(num) {
+            return num < 10 ? '0' + num : num;
+        }
+
+        let stopwatchInterval;
+        let stopwatchRunning = false;
+        let stopwatchSeconds = 0;
+
+        function startStopwatch() {
+            if (!stopwatchRunning) {
+                stopwatchInterval = setInterval(updateStopwatch, 1000);
+                stopwatchRunning = true;
+            }
+        }
+
+        function pauseStopwatch() {
+            clearInterval(stopwatchInterval);
+            stopwatchRunning = false;
+        }
+
+        function resetStopwatch() {
+            clearInterval(stopwatchInterval);
+            stopwatchRunning = false;
+            stopwatchSeconds = 0;
+            updateStopwatchDisplay();
+        }
+
+        function updateStopwatch() {
+            stopwatchSeconds++;
+            updateStopwatchDisplay();
+        }
+
+        function updateStopwatchDisplay() {
+            const hours = Math.floor(stopwatchSeconds / 3600);
+            const minutes = Math.floor((stopwatchSeconds % 3600) / 60);
+            const seconds = stopwatchSeconds % 60;
+
+            const display = `${padZero(hours)}:${padZero(minutes)}:${padZero(seconds)}`;
+            document.getElementById('stopwatch-display').textContent = display;
+        }
+    </script>
+    <nav>
+      <a href="#">Top</a>
+      <ul>
+        <li><a href="superclockwebsite.html">Page 1 (Home)</a></li>
+        <li><a href="child1.html">Page 2</a></li>
+        <li><a href="child2.html">Page 3</a></li>
+    </ul>
+    </nav>
+  </main>
+</body>
+
+</html>
